@@ -1,7 +1,7 @@
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { getAuth, Auth } from "firebase/auth";
+import { getFirestore, Firestore } from "firebase/firestore";
+import { getAnalytics, Analytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDRVG4T1lboU9Fa4haklAQztv495VRe7E",
@@ -13,15 +13,33 @@ const firebaseConfig = {
   measurementId: "G-283NGX2YD7"
 };
 
-// Initialize Firebase only if it hasn't been initialized
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Initialize Firebase
+let app: FirebaseApp;
+let auth: Auth;
+let db: Firestore;
+let analytics: Analytics | undefined;
 
-// Analytics is only available in browser
-let analytics;
 if (typeof window !== 'undefined') {
-  analytics = getAnalytics(app);
+  // Client-side initialization
+  if (!getApps().length) {
+    app = initializeApp(firebaseConfig);
+  } else {
+    app = getApps()[0];
+  }
+  
+  auth = getAuth(app);
+  db = getFirestore(app);
+  
+  try {
+    analytics = getAnalytics(app);
+  } catch (error) {
+    console.log("Analytics not available:", error);
+  }
+} else {
+  // Server-side - create dummy objects
+  app = {} as FirebaseApp;
+  auth = {} as Auth;
+  db = {} as Firestore;
 }
 
 export { app, auth, db, analytics };
