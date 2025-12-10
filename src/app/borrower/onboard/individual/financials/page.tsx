@@ -49,11 +49,11 @@ export default function IndividualFinancialsPage() {
             className="w-full"
           >
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="mpesa" className="flex items-center gap-2">
+              <TabsTrigger value="mpesa" className="flex items-center gap-2 data-[state=active]:bg-green-100 data-[state=active]:text-green-700">
                 <Smartphone className="h-4 w-4" />
                 <span className="hidden sm:inline">M-Pesa</span>
               </TabsTrigger>
-              <TabsTrigger value="bank" className="flex items-center gap-2">
+              <TabsTrigger value="bank" className="flex items-center gap-2 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">
                 <Building className="h-4 w-4" />
                 <span className="hidden sm:inline">Bank Account</span>
               </TabsTrigger>
@@ -61,10 +61,13 @@ export default function IndividualFinancialsPage() {
 
             {/* M-Pesa Tab */}
             <TabsContent value="mpesa">
-              <Card>
+              <Card className="border-green-200 bg-green-50/30">
                 <CardContent className="space-y-6 pt-6">
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Connect Your M-Pesa Account</h3>
+                    <div className="flex items-center gap-2">
+                      <Smartphone className="h-5 w-5 text-green-600" />
+                      <h3 className="font-semibold text-green-900">Connect Your M-Pesa Account</h3>
+                    </div>
                     <p className="text-sm text-muted-foreground">
                       We'll analyze your M-Pesa transactions from the last 90 days to understand your spending patterns.
                     </p>
@@ -77,15 +80,16 @@ export default function IndividualFinancialsPage() {
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="+254712345678"
+                        className="border-green-300 focus-visible:ring-green-500"
                       />
                       <p className="text-xs text-muted-foreground">
                         The phone number linked to your M-Pesa account
                       </p>
                     </div>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
-                      <p className="text-sm font-medium text-blue-900">What we'll access:</p>
-                      <ul className="text-sm text-blue-800 space-y-1">
+                    <div className="bg-green-100 border border-green-300 rounded-lg p-4 space-y-2">
+                      <p className="text-sm font-medium text-green-900">What we'll access:</p>
+                      <ul className="text-sm text-green-800 space-y-1">
                         <li>✓ Last 90 days of transaction history</li>
                         <li>✓ Daily transaction patterns</li>
                         <li>✓ Average monthly transaction volume</li>
@@ -93,9 +97,9 @@ export default function IndividualFinancialsPage() {
                       </ul>
                     </div>
 
-                    <Alert>
-                      <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>
+                    <Alert className="border-green-300 bg-green-50">
+                      <AlertCircle className="h-4 w-4 text-green-600" />
+                      <AlertDescription className="text-green-800">
                         You'll be redirected to M-Pesa to authorize this connection. We never see your PIN.
                       </AlertDescription>
                     </Alert>
@@ -103,7 +107,7 @@ export default function IndividualFinancialsPage() {
                     <Button 
                       onClick={handleConnect}
                       disabled={!phoneNumber || loading}
-                      className="w-full"
+                      className="w-full bg-green-600 hover:bg-green-700"
                       size="lg"
                     >
                       {loading ? 'Connecting...' : 'Connect M-Pesa'} 
@@ -116,10 +120,13 @@ export default function IndividualFinancialsPage() {
 
             {/* Bank Account Tab */}
             <TabsContent value="bank">
-              <Card>
+              <Card className="border-blue-200 bg-blue-50/30">
                 <CardContent className="space-y-6 pt-6">
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Connect Your Bank Account</h3>
+                    <div className="flex items-center gap-2">
+                      <Building className="h-5 w-5 text-blue-600" />
+                      <h3 className="font-semibold text-blue-900">Connect Your Bank Account</h3>
+                    </div>
                     <p className="text-sm text-muted-foreground">
                       We'll analyze 6-12 months of bank statements to understand your financial health.
                     </p>
@@ -131,6 +138,7 @@ export default function IndividualFinancialsPage() {
                         value={bankName}
                         onChange={(e) => setBankName(e.target.value)}
                         placeholder="e.g., KCB, Equity, I&M Bank"
+                        className="border-blue-300 focus-visible:ring-blue-500"
                       />
                     </div>
 
@@ -141,10 +149,11 @@ export default function IndividualFinancialsPage() {
                         value={accountNumber}
                         onChange={(e) => setAccountNumber(e.target.value)}
                         placeholder="Your account number"
+                        className="border-blue-300 focus-visible:ring-blue-500"
                       />
                     </div>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                    <div className="bg-blue-100 border border-blue-300 rounded-lg p-4 space-y-2">
                       <p className="text-sm font-medium text-blue-900">What we'll access:</p>
                       <ul className="text-sm text-blue-800 space-y-1">
                         <li>✓ 6-12 months of bank statements</li>
@@ -154,9 +163,9 @@ export default function IndividualFinancialsPage() {
                       </ul>
                     </div>
 
-                    <Alert>
-                      <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>
+                    <Alert className="border-blue-300 bg-blue-50">
+                      <AlertCircle className="h-4 w-4 text-blue-600" />
+                      <AlertDescription className="text-blue-800">
                         You'll be redirected to your bank to authorize this connection. Your credentials are never stored.
                       </AlertDescription>
                     </Alert>
@@ -164,7 +173,7 @@ export default function IndividualFinancialsPage() {
                     <Button 
                       onClick={handleConnect}
                       disabled={!bankName || !accountNumber || loading}
-                      className="w-full"
+                      className="w-full bg-blue-600 hover:bg-blue-700"
                       size="lg"
                     >
                       {loading ? 'Connecting...' : 'Connect Bank Account'} 

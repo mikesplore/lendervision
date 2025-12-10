@@ -7,8 +7,8 @@ import Link from 'next/link';
 
 const individualSteps = [
   { name: 'Identity', href: '/borrower/onboard/individual/identity', icon: UserCheck },
-  { name: 'Financials', href: '/borrower/onboard/individual/financials', icon: Wallet },
   { name: 'Details', href: '/borrower/onboard/individual/details', icon: FileText },
+  { name: 'Financials', href: '/borrower/onboard/individual/financials', icon: Wallet },
   { name: 'Assessment', href: '/borrower/onboard/individual/assessment', icon: Check },
 ];
 
