@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Logo } from '@/components/shared/Logo';
 import Link from 'next/link';
+import { signInWithEmail } from '@/lib/auth';
+import { getUserProfile } from '@/lib/firestore';
+import { useToast } from '@/hooks/use-toast';
 
 const roleLabels: Record<string, string> = {
   individual: 'Individual Borrower',
@@ -15,9 +18,10 @@ const roleLabels: Record<string, string> = {
   lender: 'Lender',
 };
 
-export default function LoginCredentialsPage() {
+function LoginCredentialsForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { toast } = useToast();
   const role = searchParams.get('role') || 'individual';
   const roleLabel = roleLabels[role] || 'Individual Borrower';
 
@@ -26,12 +30,43 @@ export default function LoginCredentialsPage() {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      toast({
+        title: "Missing Information",
+        description: "Please enter both email and password.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
-    // TODO: Implement real authentication & role verification
-    // Mock redirect based on chosen role
-    const target = role === 'lender' ? '/lender/dashboard' : '/borrower/dashboard';
-    router.push(target);
-    setLoading(false);
+    try {
+      const userCredential = await signInWithEmail(email, password);
+      const userProfile = await getUserProfile(userCredential.user.uid);
+
+      if (!userProfile) {
+        toast({
+          title: "Profile Not Found",
+          description: "User profile doesn't exist. Please contact support.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // Redirect based on user's role
+      const userRole = userProfile.role;
+      const target = userRole === 'lender' ? '/lender/dashboard' : '/borrower/dashboard';
+      router.push(target);
+    } catch (error: any) {
+      console.error("Login error:", error);
+      toast({
+        title: "Login Failed",
+        description: error.message || "Invalid credentials. Please try again.",
+        variant: "destructive",
+      });
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,5 +124,19 @@ export default function LoginCredentialsPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function LoginCredentialsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        </div>
+      </div>
+    }>
+      <LoginCredentialsForm />
+    </Suspense>
   );
 }
