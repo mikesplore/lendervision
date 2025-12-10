@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "liveness-check",
+      "description": "A person's face for liveness check",
+      "imageUrl": "https://images.unsplash.com/photo-1725028748781-7adb1df9a943?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwZXJzb24lMjBmYWNlfGVufDB8fHx8MTc2NTI3ODAwOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person face"
+    },
+    {
+      "id": "id-card-front",
+      "description": "Front of an ID card",
+      "imageUrl": "https://images.unsplash.com/photo-1591030386265-400828f609ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aWQlMjBjYXJkfGVufDB8fHx8MTc2NTMyMTU5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "id card"
+    },
+    {
+      "id": "id-card-back",
+      "description": "Back of an ID card",
+      "imageUrl": "https://images.unsplash.com/photo-1626522139680-ed61b221528e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxpZCUyMGNhcmR8ZW58MHx8fHwxNzY1MzIxNTk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "id card"
+    },
+    {
+      "id": "applicant-1",
+      "description": "Photo of applicant Jane Doe",
+      "imageUrl": "https://images.unsplash.com/photo-1592621385612-4d7129426394?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc2NTMyNTc1NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman portrait"
+    },
+    {
+      "id": "applicant-2",
+      "description": "Photo of applicant John Smith",
+      "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjUyODg5NjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "applicant-3",
+      "description": "Photo of applicant Alice Johnson",
+      "imageUrl": "https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21hbiUyMHNtaWxlfGVufDB8fHx8MTc2NTMwMzM3OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman smile"
+    },
+    {
+      "id": "applicant-4",
+      "description": "Photo of applicant Bob Brown",
+      "imageUrl": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtYW4lMjBzbWlsaW5nfGVufDB8fHx8MTc2NTI4ODQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man smiling"
+    },
+    {
+      "id": "applicant-5",
+      "description": "Photo of applicant Charlie Davis",
+      "imageUrl": "https://images.unsplash.com/photo-1627813173262-fa4cd4fa7d5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwZ2xhc3Nlc3xlbnwwfHx8fDE3NjUyODc0ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person glasses"
+    },
+    {
+      "id": "applicant-6",
+      "description": "Photo of applicant Diana Prince",
+      "imageUrl": "https://images.unsplash.com/photo-1573496527892-904f897eb744?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjUzNDQ3Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman professional"
+    }
+  ]
 }
