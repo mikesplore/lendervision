@@ -1,89 +1,28 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Users, CheckCircle, AlertTriangle, XCircle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Users, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
 import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
-import { getLenderData, LenderData } from '@/lib/firestore';
-import { useRouter } from 'next/navigation';
+
+// Mock data for lender dashboard
+const mockLenderData = {
+  institutionInfo: {
+    name: 'QuickScore Lending',
+    email: 'contact@quickscore.com',
+    phone: '+254700123456',
+    registrationNumber: 'REG-2024-001',
+  },
+  metrics: {
+    totalApplications: 156,
+    autoApproved: 89,
+    flagged: 42,
+    rejected: 25,
+  },
+};
 
 export default function LenderDashboard() {
-  const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
-  const [lenderData, setLenderData] = useState<LenderData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchLenderData = async () => {
-      if (!authLoading && !user) {
-        router.push('/auth/login-flow');
-        return;
-      }
-
-      if (user) {
-        try {
-          const data = await getLenderData(user.uid);
-          setLenderData(data);
-        } catch (error) {
-          console.error("Error fetching lender data:", error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchLenderData();
-  }, [user, authLoading, router]);
-
-  if (authLoading || loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
-        <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="text-slate-600">Loading your dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Empty state for new lenders
-  if (!lenderData || !lenderData.institutionInfo) {
-    return (
-      <div className="min-h-screen bg-slate-50 p-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">Welcome to QuickScore Lender Portal</h1>
-              <p className="text-slate-600 mt-1">Complete your institution profile to get started</p>
-            </div>
-          </div>
-
-          <Card className="border-2 border-dashed">
-            <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-              <AlertCircle className="w-16 h-16 text-slate-400 mb-4" />
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">No Institution Data</h3>
-              <p className="text-slate-600 mb-6 max-w-md">
-                You haven't completed your institution profile yet. Complete your profile to start reviewing loan applications and managing your lending portfolio.
-              </p>
-              <Button size="lg">
-                Complete Institution Profile
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
-
-  const metrics = lenderData.metrics || {
-    totalApplications: 0,
-    autoApproved: 0,
-    flagged: 0,
-    rejected: 0,
-  };
+  const { institutionInfo, metrics } = mockLenderData;
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -99,7 +38,7 @@ export default function LenderDashboard() {
             </Link>
             <div>
               <h1 className="text-2xl font-bold">Lender Dashboard</h1>
-              <p className="text-sm text-muted-foreground">{lenderData.institutionInfo?.name || 'Institution Portal'}</p>
+              <p className="text-sm text-muted-foreground">{institutionInfo.name}</p>
             </div>
           </div>
         </div>
@@ -199,19 +138,19 @@ export default function LenderDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div>
                 <p className="text-sm text-muted-foreground">Institution Name</p>
-                <p className="font-semibold">{lenderData.institutionInfo?.name || 'N/A'}</p>
+                <p className="font-semibold">{institutionInfo.name}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Email</p>
-                <p className="font-semibold">{lenderData.institutionInfo?.email || 'N/A'}</p>
+                <p className="font-semibold">{institutionInfo.email}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Phone</p>
-                <p className="font-semibold">{lenderData.institutionInfo?.phone || 'N/A'}</p>
+                <p className="font-semibold">{institutionInfo.phone}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Registration Number</p>
-                <p className="font-semibold">{lenderData.institutionInfo?.registrationNumber || 'N/A'}</p>
+                <p className="font-semibold">{institutionInfo.registrationNumber}</p>
               </div>
             </div>
           </CardContent>

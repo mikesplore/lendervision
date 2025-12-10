@@ -1,97 +1,71 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Download, ArrowLeft, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Download, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useAuth } from '@/contexts/AuthContext';
-import { getBorrowerData, BorrowerData } from '@/lib/firestore';
-import { useRouter } from 'next/navigation';
+
+// Mock data for dashboard
+const mockBorrowerData = {
+  personalInfo: {
+    fullName: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '+254712345678',
+    idNumber: '12345678',
+  },
+  eligibilityScore: 85,
+  riskRating: {
+    level: 'Low Risk',
+    defaultProbability: 5,
+  },
+  verification: {
+    identityVerified: true,
+    incomeVerified: true,
+    creditScoreVerified: true,
+    employmentVerified: true,
+  },
+  assessment: {
+    creditScore: 85,
+    incomeStability: 90,
+    debtToIncome: 75,
+    employmentHistory: 88,
+    savingsRatio: 82,
+  },
+  loanDetails: {
+    recommendedAmount: 500000,
+    interestRate: 12.5,
+    debtToIncomeRatio: 28,
+  },
+  financialSummary: {
+    monthlyIncome: 85000,
+    monthlyExpenses: 45000,
+    monthlySavings: 40000,
+    savingsRate: 47,
+  },
+  incomeData: [
+    { month: 'Jul', income: 78000 },
+    { month: 'Aug', income: 82000 },
+    { month: 'Sep', income: 85000 },
+    { month: 'Oct', income: 83000 },
+    { month: 'Nov', income: 87000 },
+    { month: 'Dec', income: 85000 },
+  ],
+};
 
 export default function BorrowerDashboard() {
-  const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
-  const [borrowerData, setBorrowerData] = useState<BorrowerData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchBorrowerData = async () => {
-      if (!authLoading && !user) {
-        router.push('/auth/login-flow');
-        return;
-      }
-
-      if (user) {
-        try {
-          const data = await getBorrowerData(user.uid);
-          setBorrowerData(data);
-        } catch (error) {
-          console.error("Error fetching borrower data:", error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchBorrowerData();
-  }, [user, authLoading, router]);
-
-  if (authLoading || loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
-        <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="text-slate-600">Loading your dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Empty state for new users
-  if (!borrowerData || !borrowerData.personalInfo) {
-    return (
-      <div className="min-h-screen bg-slate-50 p-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900">Welcome to QuickScore</h1>
-              <p className="text-slate-600 mt-1">Complete your profile to get started</p>
-            </div>
-          </div>
-
-          <Card className="border-2 border-dashed">
-            <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-              <AlertCircle className="w-16 h-16 text-slate-400 mb-4" />
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">No Profile Data</h3>
-              <p className="text-slate-600 mb-6 max-w-md">
-                You haven't completed your profile yet. Complete your profile to receive personalized loan recommendations and eligibility assessment.
-              </p>
-              <Link href="/borrower/onboard/individual/identity">
-                <Button size="lg">
-                  Complete Your Profile
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
-
   const { 
     personalInfo, 
-    eligibilityScore = 0, 
+    eligibilityScore, 
     riskRating, 
     verification, 
     assessment,
     loanDetails,
     financialSummary,
-    incomeData = []
-  } = borrowerData;
+    incomeData,
+  } = mockBorrowerData;
 
   return (
     <div className="min-h-screen bg-slate-50">
