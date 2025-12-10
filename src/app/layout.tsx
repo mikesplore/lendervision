@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'LenderVision',
+  title: 'QuickScore',
   description: 'Instant Loan Assessment powered by AI.',
 };
 

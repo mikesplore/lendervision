@@ -172,7 +172,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>LenderVision &copy; {new Date().getFullYear()}. All rights reserved.</p>
+            <p>QuickScore &copy; {new Date().getFullYear()}. All rights reserved.</p>
           </div>
         </div>
       </footer>

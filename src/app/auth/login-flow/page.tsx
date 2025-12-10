@@ -129,7 +129,7 @@ export default function LoginFlowPage() {
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-slate-50 mt-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 text-center text-sm text-slate-600">
-          <p>LenderVision &copy; {new Date().getFullYear()}. All rights reserved.</p>
+          <p>QuickScore &copy; {new Date().getFullYear()}. All rights reserved.</p>
         </div>
       </footer>
     </div>

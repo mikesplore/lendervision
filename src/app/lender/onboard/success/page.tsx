@@ -120,7 +120,7 @@ export default function LenderSuccessPage() {
               <div>
                 <h4 className="font-semibold">Access Lender Dashboard</h4>
                 <p className="text-sm text-muted-foreground">
-                  Start reviewing loan applications and funding loans on LenderVision.
+                  Start reviewing loan applications and funding loans on QuickScore.
                 </p>
               </div>
             </div>
@@ -175,7 +175,7 @@ export default function LenderSuccessPage() {
         <CardContent className="pt-6 space-y-3">
           <h4 className="font-semibold text-blue-900">Questions?</h4>
           <p className="text-sm text-blue-800">
-            Our support team is here to help. Contact us at <strong>support@lendervision.com</strong> or call <strong>+254 XXX XXX XXX</strong>
+            Our support team is here to help. Contact us at <strong>support@quickscore.com</strong> or call <strong>+254 XXX XXX XXX</strong>
           </p>
         </CardContent>
       </Card>

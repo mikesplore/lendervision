@@ -63,7 +63,7 @@ export function LenderSidebar() {
                             </Avatar>
                             <div className="flex flex-col">
                                 <span className='font-semibold'>Loan Officer</span>
-                                <span className='text-xs text-sidebar-foreground/70'>officer@lendervision.com</span>
+                                <span className='text-xs text-sidebar-foreground/70'>officer@quickscore.com</span>
                             </div>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

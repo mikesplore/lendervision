@@ -37,7 +37,7 @@ export default function LenderInfoPage() {
         <CardHeader>
           <CardTitle className="text-3xl">Welcome, Lender!</CardTitle>
           <p className="text-sm text-muted-foreground mt-2">
-            Let's set up your lending institution on LenderVision
+            Let's set up your lending institution on QuickScore
           </p>
         </CardHeader>
         <CardContent className="space-y-6">

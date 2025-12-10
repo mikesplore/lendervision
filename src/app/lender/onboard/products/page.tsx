@@ -104,7 +104,7 @@ export default function LenderProductsPage() {
         <CardHeader>
           <CardTitle className="text-2xl">Step 4: Configure Loan Products</CardTitle>
           <p className="text-sm text-muted-foreground mt-2">
-            Define the loan products you'll offer on LenderVision
+            Define the loan products you'll offer on QuickScore
           </p>
         </CardHeader>
         <CardContent className="space-y-6">

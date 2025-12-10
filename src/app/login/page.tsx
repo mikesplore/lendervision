@@ -16,7 +16,7 @@ export default function LoginPage() {
         <Card className="w-full">
           <CardHeader className="space-y-1 text-center">
             <CardTitle className="text-2xl">Welcome Back</CardTitle>
-            <CardDescription>Sign in to your LenderVision account</CardDescription>
+            <CardDescription>Sign in to your QuickScore account</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
