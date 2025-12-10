@@ -114,30 +114,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="bg-slate-50 py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">500K+</p>
-              <p className="text-slate-600 text-sm md:text-base">Active Users</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-bold text-green-600 mb-2">$2.5B+</p>
-              <p className="text-slate-600 text-sm md:text-base">Loans Processed</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-bold text-purple-600 mb-2">2 min</p>
-              <p className="text-slate-600 text-sm md:text-base">Avg Decision</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl md:text-5xl font-bold text-orange-600 mb-2">99.9%</p>
-              <p className="text-slate-600 text-sm md:text-base">Uptime</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
