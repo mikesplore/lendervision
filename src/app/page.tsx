@@ -1,89 +1,180 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/shared/Logo';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Building2, DollarSign } from 'lucide-react';
+import { ArrowRight, TrendingUp, Shield, Zap as Lightning, Users, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="p-4 md:p-6">
-        <Logo />
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
+          <Logo />
+          <Button asChild variant="outline" size="sm">
+            <Link href="/auth/login-flow">Sign In</Link>
+          </Button>
+        </div>
       </header>
-      <main className="flex-1 flex flex-col items-center justify-center text-center p-4">
-        <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4">
-          Instant Loan Assessment powered by AI.
-        </h1>
-        <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-          Securely connect your financial data and let our intelligent platform build your profile.
-          Get a decision in minutes, not days.
-        </p>
 
-        <div className="w-full max-w-4xl">
-          <h2 className="text-2xl font-bold mb-8">I am a...</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {/* Individual Borrower */}
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="text-center">
-                <Users className="h-12 w-12 mx-auto mb-2 text-blue-500" />
-                <CardTitle>Individual Borrower</CardTitle>
-                <CardDescription>Personal loan applications</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Apply for a personal loan with your financial information.
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-32">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 w-fit">
+                  <Lightning className="w-4 h-4 text-blue-400" />
+                  <span className="text-sm font-semibold text-blue-300">AI-Powered Financial Solutions</span>
+                </div>
+                
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                  Instant Loan Assessment
+                </h1>
+                
+                <p className="text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg">
+                  Get instant loan decisions powered by AI. Connect your financial data securely and receive a decision <span className="font-semibold text-white">in minutes, not days</span>.
                 </p>
-                <Button asChild className="w-full">
-                  <Link href="/auth/signup">Start Application</Link>
-                </Button>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* Business Borrower */}
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="text-center">
-                <Building2 className="h-12 w-12 mx-auto mb-2 text-green-500" />
-                <CardTitle>Business Borrower</CardTitle>
-                <CardDescription>Business loan applications</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Apply for a business loan with your company information.
-                </p>
-                <Button asChild className="w-full">
-                  <Link href="/auth/signup">Start Application</Link>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  <Link href="/auth/signup">
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
-              </CardContent>
-            </Card>
-
-            {/* Lender */}
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="text-center">
-                <DollarSign className="h-12 w-12 mx-auto mb-2 text-purple-500" />
-                <CardTitle>Lender</CardTitle>
-                <CardDescription>Register as a lender</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Join our platform as a lender and fund loans.
-                </p>
-                <Button asChild className="w-full">
-                  <Link href="/auth/signup">Get Started</Link>
+                <Button asChild size="lg" variant="outline" className="border-slate-600 text-white hover:bg-slate-800">
+                  <Link href="/auth/login-flow">Sign In</Link>
                 </Button>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
 
-          <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground">
-            <p>Already have an account?</p>
-            <Button asChild variant="outline">
-              <Link href="/auth/login">Log In</Link>
-            </Button>
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-6 pt-8 border-t border-slate-700">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-green-400" />
+                  <span className="text-sm text-slate-300">Bank-level Security</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
+                  <span className="text-sm text-slate-300">Instant Verification</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-green-400" />
+                  <span className="text-sm text-slate-300">Real-time Analytics</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Features Cards */}
+            <div className="relative h-96 hidden md:flex items-center justify-center">
+              <div className="grid grid-cols-2 gap-4 w-full">
+                <div className="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 space-y-3 hover:bg-white/20 transition">
+                  <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <Lightning className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <h3 className="font-semibold text-white text-sm">Lightning Fast</h3>
+                  <p className="text-xs text-slate-300">2-minute decision time</p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 space-y-3 hover:bg-white/20 transition">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-green-400" />
+                  </div>
+                  <h3 className="font-semibold text-white text-sm">Secure</h3>
+                  <p className="text-xs text-slate-300">Military-grade encryption</p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 space-y-3 hover:bg-white/20 transition">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <h3 className="font-semibold text-white text-sm">Smart</h3>
+                  <p className="text-xs text-slate-300">AI-powered assessment</p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-6 space-y-3 hover:bg-white/20 transition">
+                  <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-orange-400" />
+                  </div>
+                  <h3 className="font-semibold text-white text-sm">For Everyone</h3>
+                  <p className="text-xs text-slate-300">Multiple user types</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
-      <footer className="p-4 text-center text-sm text-muted-foreground">
-        <p>LenderVision &copy; {new Date().getFullYear()}</p>
+      </section>
+
+      {/* Stats Section */}
+      <section className="bg-slate-50 py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">500K+</p>
+              <p className="text-slate-600 text-sm md:text-base">Active Users</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-bold text-green-600 mb-2">$2.5B+</p>
+              <p className="text-slate-600 text-sm md:text-base">Loans Processed</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-bold text-purple-600 mb-2">2 min</p>
+              <p className="text-slate-600 text-sm md:text-base">Avg Decision</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-bold text-orange-600 mb-2">99.9%</p>
+              <p className="text-slate-600 text-sm md:text-base">Uptime</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <Logo />
+              <p className="text-slate-600 text-sm mt-4">Instant loan assessment powered by AI.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-4">Product</h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li><Link href="#" className="hover:text-slate-900">Features</Link></li>
+                <li><Link href="#" className="hover:text-slate-900">Pricing</Link></li>
+                <li><Link href="#" className="hover:text-slate-900">Security</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-4">Company</h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li><Link href="#" className="hover:text-slate-900">About</Link></li>
+                <li><Link href="#" className="hover:text-slate-900">Blog</Link></li>
+                <li><Link href="#" className="hover:text-slate-900">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-4">Legal</h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li><Link href="#" className="hover:text-slate-900">Privacy</Link></li>
+                <li><Link href="#" className="hover:text-slate-900">Terms</Link></li>
+                <li><Link href="#" className="hover:text-slate-900">Compliance</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
+            <p>LenderVision &copy; {new Date().getFullYear()}. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );

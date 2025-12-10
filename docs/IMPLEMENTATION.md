@@ -8,9 +8,10 @@ A comprehensive, conversion-optimized onboarding system for an AI-powered loan a
 
 ### Unified Entry & Authentication
 - **Landing Page** (`/`): Simple role showcase without forcing selection upfront
-- **Sign Up** (`/auth/signup`): Phone OTP or Email/Password options
-- **Role Selection** (`/auth/role-selection`): Post-authentication role choice
-- **Login** (`/auth/login`): Unified login for all user types
+- **Sign Up** (`/auth/signup`): Role selection → Phone OTP or Email/Password options
+  - Users choose their role first (Personal/Business/Lender)
+  - Then select authentication method and create account
+- **Login** (`/auth/login`): Unified login for all user types (role fetched from profile)
 
 ### Individual Borrower Flow
 **Path**: `/borrower/onboard/individual/*`
@@ -103,8 +104,8 @@ src/app/
 ├── login/page.tsx                    # Unified login
 ├── auth/
 │   ├── layout.tsx
-│   ├── signup/page.tsx               # Phone/Email sign-up
-│   └── role-selection/page.tsx       # Post-auth role selection
+│   ├── signup/page.tsx               # Role selection → Phone/Email sign-up
+│   └── (role-selection removed - now part of signup flow)
 ├── borrower/onboard/
 │   ├── individual/
 │   │   ├── layout.tsx
@@ -157,18 +158,25 @@ docs/
 ```
 User visits lendervision.com
 │
-├─→ Clicks "Get Started" on any role card
+├─→ Clicks "Get Started" on landing page
 │   └─→ /auth/signup
-│       ├─→ Phone + OTP verification
-│       │   └─→ /auth/role-selection
+│       ├─→ Select Role (Individual/Business/Lender)
+│       │   ├─→ Phone + OTP verification
+│       │   │   └─→ Redirect to role-specific onboarding
+│       │   │       ├─→ /borrower/onboard/individual/identity
+│       │   │       ├─→ /borrower/onboard/business/info
+│       │   │       └─→ /lender/onboard/info
+│       │   │
+│       │   └─→ Email + Password
+│       │       └─→ Redirect to role-specific onboarding (same paths)
 │       │
-│       └─→ Email + Password
-│           └─→ /auth/role-selection
+│       └─→ (Role saved to user profile during account creation)
 │
-└─→ Selects Role:
-    ├─→ Individual → /borrower/onboard/individual/identity
-    ├─→ Business → /borrower/onboard/business/info
-    └─→ Lender → /lender/onboard/info
+└─→ Login via /auth/login
+    └─→ Fetch role from profile
+        └─→ Redirect based on role
+            ├─→ Individual/Business → /borrower/dashboard
+            └─→ Lender → /lender/dashboard
 ```
 
 ## 📊 Copywriting Guidelines

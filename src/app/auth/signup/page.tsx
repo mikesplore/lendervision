@@ -6,8 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Logo } from '@/components/shared/Logo';
 import Link from 'next/link';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Users, Building2, DollarSign } from 'lucide-react';
 
 export default function SignUpPage() {
   const [signupMethod, setSignupMethod] = useState<'phone' | 'email'>('phone');
@@ -16,8 +15,41 @@ export default function SignUpPage() {
   const [otp, setOtp] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [step, setStep] = useState<'method' | 'otp' | 'password'>('method');
+  const [userRole, setUserRole] = useState<'individual' | 'business' | 'lender' | null>(null);
+  const [step, setStep] = useState<'role' | 'method' | 'otp'>('role');
   const [loading, setLoading] = useState(false);
+
+  const roles = [
+    {
+      id: 'individual',
+      title: 'Personal Borrower',
+      icon: Users,
+      description: 'Get a personal loan based on your financial activity',
+      color: 'text-blue-600',
+      onboardingPath: '/borrower/onboard/individual/identity',
+    },
+    {
+      id: 'business',
+      title: 'Business Borrower',
+      icon: Building2,
+      description: 'Grow your business with tailored financing',
+      color: 'text-green-600',
+      onboardingPath: '/borrower/onboard/business/info',
+    },
+    {
+      id: 'lender',
+      title: 'Lender',
+      icon: DollarSign,
+      description: 'Fund loans and earn competitive returns',
+      color: 'text-purple-600',
+      onboardingPath: '/lender/onboard/info',
+    },
+  ];
+
+  const getOnboardingPath = () => {
+    const role = roles.find((r) => r.id === userRole);
+    return role?.onboardingPath || '/borrower/dashboard';
+  };
 
   const handlePhoneSubmit = async () => {
     setLoading(true);
@@ -31,19 +63,17 @@ export default function SignUpPage() {
     setLoading(true);
     // TODO: Implement OTP verification
     console.log('Verifying OTP:', otp);
-    // IMPORTANT: During SIGN-UP, go to role selection to set user role
-    // This role is saved to the user's profile
-    window.location.href = '/auth/role-selection';
+    // TODO: Save userRole to database with account
+    window.location.href = getOnboardingPath();
     setLoading(false);
   };
 
-  const handleEmailSubmit = async () => {
+  const handleEmailSignup = async () => {
     setLoading(true);
     // TODO: Implement email sign-up
     console.log('Creating account with email:', email);
-    // IMPORTANT: During SIGN-UP, go to role selection to set user role
-    // This role is saved to the user's profile
-    window.location.href = '/auth/role-selection';
+    // TODO: Save userRole to database with account
+    window.location.href = getOnboardingPath();
     setLoading(false);
   };
 
@@ -55,14 +85,51 @@ export default function SignUpPage() {
         </div>
 
         <Card className="w-full">
-          <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-2xl">Create Your Account</CardTitle>
-            <CardDescription>Join thousands getting instant loan decisions</CardDescription>
-          </CardHeader>
+          {step === 'role' && (
+            <>
+              <CardHeader className="space-y-1 text-center">
+                <CardTitle className="text-2xl">Who are you?</CardTitle>
+                <CardDescription>Select your role to get started</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {roles.map((role) => {
+                  const IconComponent = role.icon;
+                  return (
+                    <button
+                      key={role.id}
+                      onClick={() => {
+                        setUserRole(role.id as 'individual' | 'business' | 'lender');
+                        setStep('method');
+                      }}
+                      className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                        userRole === role.id
+                          ? 'border-primary bg-primary/5'
+                          : 'border-slate-200 hover:border-primary'
+                      }`}
+                    >
+                      <div className="flex items-start gap-4">
+                        <IconComponent className={`w-6 h-6 mt-1 ${role.color} flex-shrink-0`} />
+                        <div>
+                          <h3 className="font-semibold text-slate-900">{role.title}</h3>
+                          <p className="text-sm text-slate-600 mt-1">{role.description}</p>
+                        </div>
+                        <ArrowRight className="w-5 h-5 text-slate-300 ml-auto mt-1 flex-shrink-0" />
+                      </div>
+                    </button>
+                  );
+                })}
+              </CardContent>
+            </>
+          )}
 
-          <CardContent className="space-y-6">
-            {step === 'method' && (
-              <>
+          {step === 'method' && (
+            <>
+              <CardHeader className="space-y-1 text-center">
+                <CardTitle className="text-2xl">Create Your Account</CardTitle>
+                <CardDescription>Join thousands getting instant loan decisions</CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-6">
                 <div className="grid gap-4">
                   <div className="space-y-2">
                     <Label>Choose your sign-up method</Label>
@@ -141,7 +208,7 @@ export default function SignUpPage() {
                       />
                     </div>
                     <Button
-                      onClick={handleEmailSubmit}
+                      onClick={handleEmailSignup}
                       disabled={!email || !password || password !== confirmPassword || loading}
                       className="w-full"
                     >
@@ -150,17 +217,32 @@ export default function SignUpPage() {
                   </div>
                 )}
 
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => setStep('role')}
+                >
+                  Back
+                </Button>
+
                 <div className="text-center text-sm text-muted-foreground">
                   Already have an account?{' '}
                   <Link href="/auth/login" className="underline hover:text-primary">
                     Sign In
                   </Link>
                 </div>
-              </>
-            )}
+              </CardContent>
+            </>
+          )}
 
-            {step === 'otp' && (
-              <>
+          {step === 'otp' && (
+            <>
+              <CardHeader className="space-y-1 text-center">
+                <CardTitle className="text-2xl">Verify Your Number</CardTitle>
+                <CardDescription>We've sent a code to your phone</CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-6">
                 <div className="space-y-4">
                   <p className="text-sm text-muted-foreground">
                     We've sent a 6-digit code to <strong>{phoneNumber}</strong>
@@ -199,9 +281,9 @@ export default function SignUpPage() {
                     Resend OTP
                   </Button>
                 </div>
-              </>
-            )}
-          </CardContent>
+              </CardContent>
+            </>
+          )}
         </Card>
 
         <div className="text-center text-xs text-muted-foreground mt-6">

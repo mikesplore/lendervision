@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Logo } from "@/components/shared/Logo";
-import Link from "next/link";
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Badge } from "@/components/ui/badge";
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Logo } from '@/components/shared/Logo';
+import Link from 'next/link';
 
 const roleLabels: Record<string, string> = {
   individual: 'Individual Borrower',
@@ -16,11 +15,11 @@ const roleLabels: Record<string, string> = {
   lender: 'Lender',
 };
 
-export default function AuthLoginPage() {
+export default function LoginCredentialsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const roleParam = searchParams.get('role') || 'individual';
-  const selectedRole = ['individual', 'business', 'lender'].includes(roleParam) ? roleParam : 'individual';
+  const role = searchParams.get('role') || 'individual';
+  const roleLabel = roleLabels[role] || 'Individual Borrower';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,20 +27,10 @@ export default function AuthLoginPage() {
 
   const handleLogin = async () => {
     setLoading(true);
-    // TODO: Replace with real authentication + role fetch
-    const role = selectedRole;
-
-    switch (role) {
-      case 'individual':
-      case 'business':
-        router.push('/borrower/dashboard');
-        break;
-      case 'lender':
-        router.push('/lender/dashboard');
-        break;
-      default:
-        router.push('/');
-    }
+    // TODO: Implement real authentication & role verification
+    // Mock redirect based on chosen role
+    const target = role === 'lender' ? '/lender/dashboard' : '/borrower/dashboard';
+    router.push(target);
     setLoading(false);
   };
 
@@ -53,8 +42,7 @@ export default function AuthLoginPage() {
         </div>
         <Card className="w-full">
           <CardHeader className="space-y-1 text-center">
-            <Badge variant="outline" className="mx-auto w-fit">{roleLabels[selectedRole]}</Badge>
-            <CardTitle className="text-2xl">Sign In</CardTitle>
+            <CardTitle className="text-2xl">Sign in as {roleLabel}</CardTitle>
             <CardDescription>Enter your credentials to continue</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
@@ -79,20 +67,23 @@ export default function AuthLoginPage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
-            <Button 
-              className="w-full" 
+            <Button
+              className="w-full"
               onClick={handleLogin}
               disabled={loading || !email || !password}
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
             <div className="text-sm text-center text-muted-foreground space-y-2">
-                <p>
-                    Want to choose a different role? <Link href="/auth/login-flow" className="underline hover:text-primary font-medium">Back to role selection</Link>
-                </p>
-                <p>
-                    Don't have an account? <Link href="/auth/signup" className="underline hover:text-primary font-medium">Create one</Link>
-                </p>
+              <p>
+                Not you? <Link href="/auth/login" className="underline hover:text-primary font-medium">Choose a different role</Link>
+              </p>
+              <p>
+                Don't have an account? <Link href="/auth/signup" className="underline hover:text-primary font-medium">Create one</Link>
+              </p>
+              <p>
+                <Link href="#" className="underline hover:text-primary">Forgot password?</Link>
+              </p>
             </div>
           </CardFooter>
         </Card>
