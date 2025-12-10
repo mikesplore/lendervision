@@ -8,9 +8,9 @@ export default function BusinessBorrowerDashboardLayout({
 }) {
   return (
     <div className="bg-white min-h-screen">
-      <SidebarProvider>
+      <SidebarProvider defaultOpen={true}>
         <BusinessBorrowerSidebar />
-        <SidebarInset>
+        <SidebarInset className="bg-white">
           {children}
         </SidebarInset>
       </SidebarProvider>

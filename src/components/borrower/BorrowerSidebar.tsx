@@ -10,7 +10,7 @@ import {
     SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/shared/Logo';
-import { LayoutDashboard, FileText, CreditCard, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, CreditCard, Settings, LogOut, Calculator } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { usePathname } from 'next/navigation';
 
@@ -18,7 +18,7 @@ export function BorrowerSidebar() {
     const pathname = usePathname();
 
     return (
-        <Sidebar>
+        <Sidebar className="bg-white border-r">
             <SidebarHeader>
                 <div className="flex items-center justify-between">
                     <Logo inHeader={false} />
@@ -43,6 +43,12 @@ export function BorrowerSidebar() {
                         <SidebarMenuButton href="#" tooltip="My Loans">
                             <CreditCard />
                             <span>My Loans</span>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton href="/borrower/onboard/individual/assessment" isActive={pathname.includes('/assessment')} tooltip="Credit Assessment">
+                            <Calculator />
+                            <span>Assessment</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                     <SidebarMenuItem>

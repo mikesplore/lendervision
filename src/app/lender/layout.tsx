@@ -8,9 +8,9 @@ export default function LenderLayout({
 }) {
   return (
     <div className="bg-white min-h-screen">
-      <SidebarProvider>
+      <SidebarProvider defaultOpen={true}>
         <LenderSidebar />
-        <SidebarInset>
+        <SidebarInset className="bg-white">
           {children}
         </SidebarInset>
       </SidebarProvider>

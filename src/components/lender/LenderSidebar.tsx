@@ -18,7 +18,7 @@ export function LenderSidebar() {
     const pathname = usePathname();
 
     return (
-        <Sidebar>
+        <Sidebar className="bg-white border-r">
             <SidebarHeader>
                 <div className="flex items-center justify-between">
                     <Logo inHeader={false} />
