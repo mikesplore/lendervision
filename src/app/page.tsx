@@ -52,8 +52,8 @@ export default function Home() {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-slate-600 text-white hover:bg-slate-800">
-                  <Link href="/borrower/onboard/individual/assessment">Digital Assessment</Link>
+                <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900 transition-colors">
+                  <Link href="/borrower/onboard/individual/identity">Digital Assessment</Link>
                 </Button>
               </div>
 
@@ -114,8 +114,142 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing Packages Section */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Simple, Transparent Pricing</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Choose the plan that fits your needs. No hidden fees, no surprises.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Basic Package */}
+            <div className="bg-white rounded-xl border-2 border-slate-200 p-8 hover:shadow-lg transition-shadow">
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Basic</h3>
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-4xl font-bold text-slate-900">Free</span>
+                </div>
+                <p className="text-slate-600 text-sm mt-2">Perfect for first-time borrowers</p>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Basic credit assessment</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Up to KES 100,000 loan amount</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Standard interest rates</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">3-12 month repayment terms</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Email support</span>
+                </li>
+              </ul>
+              <Button asChild className="w-full" variant="outline">
+                <Link href="/auth/signup">Get Started</Link>
+              </Button>
+            </div>
+
+            {/* Premium Package */}
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl border-2 border-blue-600 p-8 relative hover:shadow-xl transition-shadow">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                <span className="bg-green-500 text-white text-xs font-bold px-4 py-1 rounded-full">MOST POPULAR</span>
+              </div>
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">Premium</h3>
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-4xl font-bold text-white">2.5%</span>
+                  <span className="text-white/80">of loan</span>
+                </div>
+                <p className="text-white/90 text-sm mt-2">For serious borrowers</p>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Advanced AI credit assessment</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Up to KES 500,000 loan amount</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Reduced interest rates (up to 15% off)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">3-24 month repayment terms</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Priority support (24/7)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white">Instant approval decisions</span>
+                </li>
+              </ul>
+              <Button asChild className="w-full bg-white text-blue-600 hover:bg-blue-50">
+                <Link href="/auth/signup">Get Started</Link>
+              </Button>
+            </div>
+
+            {/* Business Package */}
+            <div className="bg-white rounded-xl border-2 border-slate-200 p-8 hover:shadow-lg transition-shadow">
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Business</h3>
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-4xl font-bold text-slate-900">Custom</span>
+                </div>
+                <p className="text-slate-600 text-sm mt-2">For growing businesses</p>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Comprehensive business assessment</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Up to KES 5,000,000 loan amount</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Competitive business rates</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">6-36 month repayment terms</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Dedicated account manager</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Custom financial reporting</span>
+                </li>
+              </ul>
+              <Button asChild className="w-full" variant="outline">
+                <Link href="/auth/signup">Contact Sales</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-slate-50">
+      <footer className="border-t border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>

@@ -6,9 +6,22 @@ import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
 import { CheckCircle, TrendingUp, DollarSign, Percent, Clock, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function IndividualAssessmentPage() {
   const router = useRouter();
+  
+  // Redirect to first step if assessment data is not present
+  useEffect(() => {
+    const hasCompletedIdentity = sessionStorage.getItem('identityComplete');
+    const hasCompletedDetails = sessionStorage.getItem('detailsComplete');
+    const hasCompletedFinancials = sessionStorage.getItem('financialsComplete');
+    
+    // If user hasn't completed the previous steps, redirect to identity
+    if (!hasCompletedIdentity || !hasCompletedDetails || !hasCompletedFinancials) {
+      router.push('/borrower/onboard/individual/identity');
+    }
+  }, [router]);
   
   // Mock assessment data
   const assessment = {
